@@ -14,4 +14,4 @@ async function signIn(params: SignInParams) {
   return data;
 }
 
-export { signIn };
+export { signIn, type SignInParams, type SignInResponse };
