@@ -28,7 +28,8 @@ export function Transactions() {
             slidesPerView={3}
             centeredSlides
           >
-            <SliderNavigation isBegin={true} isEnd={false} />
+            <SliderNavigation />
+
             {MONTHS.map((month, index) => (
               <SwiperSlide key={month}>
                 {({ isActive }) => (
