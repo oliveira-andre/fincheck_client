@@ -3,7 +3,7 @@ import 'swiper/css';
 
 import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
-import { AccountSliderNavigation } from "./AccountSliderNavigation";
+import { SliderNavigation } from "./SliderNavigation";
 import { useAccountsController } from "./useAccountsController";
 
 export function Accounts() {
@@ -39,7 +39,7 @@ export function Accounts() {
                 Minhas Contas
               </strong>
               
-              <AccountSliderNavigation isBegin={sliderState.isBeginning} isEnd={sliderState.isEnd} />
+              <SliderNavigation isBegin={sliderState.isBeginning} isEnd={sliderState.isEnd} />
             </div>
 
             <SwiperSlide>
