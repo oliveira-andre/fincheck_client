@@ -11,11 +11,13 @@ import { SliderNavigation } from "./SliderNavigation";
 import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
 import { useTransactionsController } from "./useTransactionsController";
 import { Spinner } from "../../../../components/Spinner";
+import EmptyState from "../../../../../assets/empty-state.svg";
 
 export function Transactions() {
   const {
     areValuesVisible,
-    isLoading
+    isLoading,
+    transactions,
   } = useTransactionsController();
 
   return (
@@ -66,46 +68,59 @@ export function Transactions() {
         </header>
 
         <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-          <div className="bg-white rounded-2xl p-4 flex items-center justify-between gap-4">
-            <div className="flex-1 flex items-start gap-3">
-              <CategoryIcon type="expense" category="food" />
-
-              <div>
-                <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
-                <span className="text-sm text-gray-600">25/12/2025</span>
-              </div>
+          {transactions.length === 0 && (
+            <div className="flex flex-col items-center justify-center h-full w-full gap-4">
+              <img src={EmptyState} alt="Empty State" />
+              <p className="text-gray-600">Não encontramos nenhuma transação</p>
             </div>
+          )}
 
-            <span className={
-              cn(
-                'text-red-800 tracking-[-0.5px] font-medium',
-                !areValuesVisible && 'blur-sm'
-              )}
-            >- {formatCurrency(10000.23)}</span>
-          </div>
+          {transactions.length > 0 && (
+            <>
+              <div className="bg-white rounded-2xl p-4 flex items-center justify-between gap-4">
+                <div className="flex-1 flex items-start gap-3">
+                  <CategoryIcon type="expense" category="food" />
 
-          <div className="bg-white rounded-2xl p-4 flex items-center justify-between gap-4">
-            <div className="flex-1 flex items-start gap-3">
-              <CategoryIcon type="income" />
+                  <div>
+                    <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
+                    <span className="text-sm text-gray-600">25/12/2025</span>
+                  </div>
+                </div>
 
-              <div>
-                <strong className="font-bold tracking-[-0.5px] block">Salário</strong>
-                <span className="text-sm text-gray-600">25/12/2025</span>
+                <span className={
+                  cn(
+                    'text-red-800 tracking-[-0.5px] font-medium',
+                    !areValuesVisible && 'blur-sm'
+                  )}
+                >
+                  - {formatCurrency(10000.23)}
+                </span>
               </div>
-            </div>
 
-            <span
-              className={cn(
-                'text-green-800 tracking-[-0.5px] font-medium',
-                !areValuesVisible && 'blur-sm'
-              )}
-            >
-              + {formatCurrency(10000.23)}
-            </span>
+              <div className="bg-white rounded-2xl p-4 flex items-center justify-between gap-4">
+                <div className="flex-1 flex items-start gap-3">
+                  <CategoryIcon type="income" />
+
+                  <div>
+                    <strong className="font-bold tracking-[-0.5px] block">Salário</strong>
+                    <span className="text-sm text-gray-600">25/12/2025</span>
+                  </div>
+                </div>
+
+                <span
+                  className={cn(
+                    'text-green-800 tracking-[-0.5px] font-medium',
+                    !areValuesVisible && 'blur-sm'
+                  )}
+                >
+                  + {formatCurrency(10000.23)}
+                </span>
+              </div>
+            </>
+          )}
           </div>
-        </div>
-      </>
-    )}
+        </>
+      )}
     </div>
   )
 }
