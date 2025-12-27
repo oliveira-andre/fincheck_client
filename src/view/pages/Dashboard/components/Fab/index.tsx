@@ -8,9 +8,9 @@ export function Fab() {
     <div className="fixed right-4 bottom-4">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
-          <div className="text-white bg-teal-900 rounded-full w-12 h-12 flex items-center justify-center">
+          <button className="text-white bg-teal-900 rounded-full w-12 h-12 flex items-center justify-center">
             <PlusIcon className="w-6 h-6" />
-          </div>
+          </button>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Content>
