@@ -1,4 +1,5 @@
 import { createContext, useCallback, useState } from "react";
+import type { BankAccount } from "../../../../../app/entities/BankAccount";
 
 interface DashboardContextValue {
   areValuesVisible: boolean;
@@ -6,6 +7,9 @@ interface DashboardContextValue {
   isNewAccountModalOpen: boolean;
   openNewAccountModal: () => void;
   closeNewAccountModal: () => void;
+  isEditAccountModalOpen: boolean;
+  openEditAccountModal: (bankAccount: BankAccount) => void;
+  closeEditAccountModal: () => void;
   newTransactionType: 'INCOME' | 'EXPENSE' | null;
   isNewTransactionModalOpen: boolean;
   openNewTransactionModal: (type: 'INCOME' | 'EXPENSE') => void;
@@ -18,6 +22,8 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [areValuesVisible, setAreValuesVisible] = useState(true);
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
+  const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(false);
+  const [accountBeingEdited, setAccountBeingEdited] = useState<BankAccount | null>(null);
   const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null);
 
   const toggleValuesVisibility = useCallback(() => {
@@ -30,6 +36,16 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
 
   const closeNewAccountModal = useCallback(() => {
     setIsNewAccountModalOpen(false);
+  }, []);
+
+  const openEditAccountModal = useCallback((bankAccount: BankAccount) => {
+    setAccountBeingEdited(bankAccount);
+    setIsEditAccountModalOpen(true);
+  }, []);
+
+  const closeEditAccountModal = useCallback(() => {
+    setAccountBeingEdited(null);
+    setIsEditAccountModalOpen(false);
   }, []);
 
   const openNewTransactionModal = useCallback((type: 'INCOME' | 'EXPENSE') => {
@@ -50,6 +66,9 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
         isNewAccountModalOpen,
         openNewAccountModal,
         closeNewAccountModal,
+        isEditAccountModalOpen,
+        openEditAccountModal,
+        closeEditAccountModal,
         isNewTransactionModalOpen,
         newTransactionType,
         openNewTransactionModal,
