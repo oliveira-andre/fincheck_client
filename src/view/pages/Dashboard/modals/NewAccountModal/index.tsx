@@ -15,6 +15,7 @@ export function NewAccountModal() {
     register,
     control,
     errors,
+    isLoading,
   } = useNewAccountModalController();
 
   return (
@@ -65,8 +66,8 @@ export function NewAccountModal() {
                     value: 'CHECKING',
                   },
                   {
-                    label: 'Investimentos',
-                    value: 'INVESTIMENT',
+                    label: 'Investimento',
+                    value: 'INVESTMENT',
                   },
                   {
                     label: 'Dinheiro Fisico',
@@ -94,7 +95,7 @@ export function NewAccountModal() {
           />
         </div>
 
-        <Button type="submit" className="w-full mt-6">
+        <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
           Criar
         </Button>
       </form>

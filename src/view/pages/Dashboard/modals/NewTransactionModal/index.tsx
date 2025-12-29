@@ -49,8 +49,8 @@ export function NewTransactionModal() {
                 value: 'CHECKING',
               },
               {
-                label: 'Investimentos',
-                value: 'INVESTIMENT',
+                label: 'Investimento',
+                value: 'INVESTMENT',
               },
               {
                 label: 'Dinheiro Fisico',
@@ -67,8 +67,8 @@ export function NewTransactionModal() {
                 value: 'CHECKING',
               },
               {
-                label: 'Investimentos',
-                value: 'INVESTIMENT',
+                label: 'Investimento',
+                value: 'INVESTMENT',
               },
               {
                 label: 'Dinheiro Fisico',

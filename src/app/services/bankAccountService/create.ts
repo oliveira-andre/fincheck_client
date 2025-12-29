@@ -4,7 +4,7 @@ interface BankAccountParams {
   name: string;
   initialBalance: number;
   color: string;
-  type: 'CHECKING' | 'INVESTIMENT' | 'CASH';
+  type: 'CHECKING' | 'INVESTMENT' | 'CASH';
 }
 
 export async function create(params: BankAccountParams) {

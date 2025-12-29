@@ -1,15 +1,18 @@
 import { z } from "zod";
+import { toast } from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useDashboard } from "../../components/DashboardContext/useDashboard";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "react-hot-toast";
-import { useForm } from "react-hook-form";
+import { bankAccountService } from "../../../../../app/services/bankAccountService";
+import { currencyStringToNumber } from "../../../../../app/utils/currencyStringToNumber";
 
 const schema = z.object({
   name: z.string().nonempty('Nome da conta é obrigatório'),
   initialBalance: z.string().nonempty('Saldo inicial é obrigatório'),
   color: z.string().nonempty('Cor é obrigatória'),
-  type: z.enum(['CHECKING', 'INVESTIMENT', 'CASH']),
+  type: z.enum(['CHECKING', 'INVESTMENT', 'CASH']),
 });
 
 type formData = z.infer<typeof schema>;
@@ -25,15 +28,29 @@ export function useNewAccountModalController() {
     handleSubmit: hookFormHandleSubmit,
     formState: { errors },
     control,
+    reset,
   } = useForm<formData>({
     resolver: zodResolver(schema),
   });
 
+  const queryClient = useQueryClient();
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: bankAccountService.create,
+  });
+
   const handleSubmit = hookFormHandleSubmit(async (data) => {
     try {
-      console.log(data)
+      await mutateAsync({
+        ...data,
+        initialBalance: currencyStringToNumber(data.initialBalance),
+      });
+
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+      toast.success('Conta criada com sucesso');
+      reset();
+      closeNewAccountModal();
     } catch (error) {
-      toast.error('Ocorreu um erro ao criar a conta');
+      toast.error('Erro ao criar a conta');
     }
   });
 
@@ -44,5 +61,6 @@ export function useNewAccountModalController() {
     control,
     handleSubmit,
     errors,
+    isLoading: isPending,
   };
 }

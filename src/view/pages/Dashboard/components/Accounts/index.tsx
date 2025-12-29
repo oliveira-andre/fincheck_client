@@ -80,6 +80,7 @@ export function Accounts() {
                 </button>
               </>
             )}
+
             {accounts.length > 0 && (
               <div> 
                 <Swiper
@@ -103,32 +104,16 @@ export function Accounts() {
                     />
                   </div>
 
-                  <SwiperSlide>
-                    <AccountCard
-                      color="#7950F2"
-                      name="Nubank"
-                      balance={10000.23}
-                      type="CASH"
-                    />
-                  </SwiperSlide>
-
-                  <SwiperSlide>
-                    <AccountCard
-                      color="#1864AB"
-                      name="XP Investimentos"
-                      balance={10000.23}
-                      type="INVESTMENT"
-                    />
-                  </SwiperSlide>
-
-                  <SwiperSlide>
-                    <AccountCard
-                      color="#087F5B"
-                      name="Banco do Brasil"
-                      balance={10000.23}
-                      type="CHECKING"
-                    />
-                  </SwiperSlide>
+                  {accounts.map(account => (
+                    <SwiperSlide key={account.id}>
+                      <AccountCard
+                        color={account.color}
+                        name={account.name}
+                        balance={account.currentBalance}
+                        type={account.type}
+                      />
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               </div>
             )}
