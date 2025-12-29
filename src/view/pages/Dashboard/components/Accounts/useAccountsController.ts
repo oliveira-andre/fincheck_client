@@ -23,6 +23,12 @@ export function useAccountsController() {
     queryFn: bankAccountService.getAll,
   });
 
+  const currentBalance = useMemo(() => {
+    if (!data) return 0;
+
+    return data.reduce((total, account) => total + account.currentBalance, 0);
+  }, [data]);
+
   return {
     sliderState,
     setSliderState,
@@ -32,5 +38,6 @@ export function useAccountsController() {
     isLoading: isFetching,
     accounts: data ?? [],
     openNewAccountModal,
+    currentBalance,
   };
 }
