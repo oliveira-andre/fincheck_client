@@ -1,6 +1,6 @@
 import { httpClient } from "../httpClient";
 
-import { BankAccount } from "../../entities/BankAccount";
+import type { BankAccount } from "../../entities/BankAccount";
 
 type BankAccountsResponse = Array<BankAccount>;
 
