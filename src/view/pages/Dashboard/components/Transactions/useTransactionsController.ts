@@ -19,7 +19,7 @@ export function useTransactionsController() {
     areValuesVisible,
     isLoading: false,
     isInitialLoading: false,
-    transactions: [{}],
+    transactions: [],
     isFiltersModalOpen,
     handleOpenFiltersModal,
     handleCloseFiltersModal,
