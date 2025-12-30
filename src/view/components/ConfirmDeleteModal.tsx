@@ -6,9 +6,11 @@ interface ConfirmDeleteModalProps {
   onClose: () => void;
   title: string;
   description?: string;
+  onConfirm: () => void;
+  isLoading: boolean;
 }
 
-export function ConfirmDeleteModal({ onClose, title, description }: ConfirmDeleteModalProps) {
+export function ConfirmDeleteModal({ onClose, title, description, onConfirm, isLoading }: ConfirmDeleteModalProps) {
   return (
     <Modal
       title="Excluir"
@@ -26,11 +28,23 @@ export function ConfirmDeleteModal({ onClose, title, description }: ConfirmDelet
       </div>
 
       <div className="mt-10 space-y-4">
-        <Button type="button" className="w-full" isLoading={false} variant="danger">
+        <Button
+          type="button"
+          className="w-full"
+          isLoading={isLoading}
+          variant="danger"
+          onClick={onConfirm}
+        >
           Sim, desejo excluir
         </Button>
 
-        <Button type="button" className="w-full" isLoading={false} variant="ghost">
+        <Button
+          type="button"
+          className="w-full"
+          variant="ghost"
+          onClick={onClose}
+          disabled={isLoading}
+        >
           Cancelar
         </Button>
       </div>
