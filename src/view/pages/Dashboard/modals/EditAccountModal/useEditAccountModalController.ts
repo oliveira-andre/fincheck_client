@@ -2,6 +2,7 @@ import { z } from "zod";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 import { useDashboard } from "../../components/DashboardContext/useDashboard";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -41,6 +42,8 @@ export function useEditAccountModalController() {
     },
   });
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const queryClient = useQueryClient();
   const { isPending, mutateAsync } = useMutation({
     mutationFn: bankAccountService.update,
@@ -62,6 +65,14 @@ export function useEditAccountModalController() {
     }
   });
 
+  function handleOpenDeleteModal() {
+    setIsDeleteModalOpen(true);
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeleteModalOpen(false);
+  }
+
   return {
     isEditAccountModalOpen,
     closeEditAccountModal,
@@ -71,5 +82,8 @@ export function useEditAccountModalController() {
     errors,
     accountBeingEdited,
     isLoading: isPending,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    isDeleteModalOpen,
   };
 }
