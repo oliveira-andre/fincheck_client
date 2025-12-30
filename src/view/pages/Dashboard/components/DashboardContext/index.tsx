@@ -12,6 +12,8 @@ interface DashboardContextValue {
   closeEditAccountModal: () => void;
   newTransactionType: 'INCOME' | 'EXPENSE' | null;
   isNewTransactionModalOpen: boolean;
+  accountBeingEdited: BankAccount | null;
+  setAccountBeingEdited: (bankAccount: BankAccount) => void;
   openNewTransactionModal: (type: 'INCOME' | 'EXPENSE') => void;
   closeNewTransactionModal: () => void;
 }
@@ -69,6 +71,8 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
         isEditAccountModalOpen,
         openEditAccountModal,
         closeEditAccountModal,
+        accountBeingEdited,
+        setAccountBeingEdited,
         isNewTransactionModalOpen,
         newTransactionType,
         openNewTransactionModal,

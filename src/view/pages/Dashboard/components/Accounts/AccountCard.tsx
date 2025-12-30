@@ -2,6 +2,7 @@ import { cn } from "../../../../../app/utils/cn";
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { BankAccountTypeIcon } from "../../../../components/icons/BankAccountTypeIcon";
 import { useDashboard } from "../DashboardContext/useDashboard";
+import type { BankAccount } from "../../../../../app/entities/BankAccount";
 
 interface AccountCardProps {
   data: BankAccount;
