@@ -43,6 +43,12 @@ export function useTransactionsController() {
     setIsFiltersModalOpen(false);
   }
 
+  function handleApplyFilters({ bankAccountId, year }: { bankAccountId: string | undefined, year: number }) {
+    handleChangeFilters('bankAccountId')(bankAccountId);
+    handleChangeFilters('year')(year);
+    setIsFiltersModalOpen(false);
+  }
+
   return {
     areValuesVisible,
     isLoading,
@@ -53,5 +59,6 @@ export function useTransactionsController() {
     handleChangeFilters,
     handleOpenFiltersModal,
     handleCloseFiltersModal,
+    handleApplyFilters,
   };
 }
