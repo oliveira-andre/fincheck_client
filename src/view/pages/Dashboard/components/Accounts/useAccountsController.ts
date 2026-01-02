@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
 import { useDashboard } from "../DashboardContext/useDashboard";
-import { bankAccountService } from "../../../../../app/services/bankAccountService";
 import { useBankAccounts } from "../../../../../app/hooks/useBankAccounts";
 
 export function useAccountsController() {
