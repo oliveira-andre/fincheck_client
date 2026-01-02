@@ -81,7 +81,7 @@ export function useEditTransactionModalController(
       });
 
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
-      // queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
 
       toast.success(
         transaction!.type === 'EXPENSE' ? 'Despesa editada com sucesso' : 'Receita editada com sucesso',
@@ -99,7 +99,8 @@ export function useEditTransactionModalController(
       await deleteTransaction(transaction!.id);
 
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
-      // queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+
       toast.success(`A ${transaction!.type === 'EXPENSE' ? 'despesa' : 'receita'} foi deletada com sucesso`);
       onClose();
     } catch (error) {
