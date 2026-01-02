@@ -8,6 +8,8 @@ import { useEditTransactionModalController } from "./useEditTransactionModalCont
 import { Button } from "../../../../components/Button";
 import { DatePickerInput } from "../../../../components/DatePickerInput";
 import type { Transaction } from "../../../../../app/entities/Transaction";
+import { ConfirmDeleteModal } from "../../../../components/ConfirmDeleteModal";
+import { TrashIcon } from "../../../../components/icons/TrashIcon";
 
 interface EditTransactionModalProps {
   open: boolean;
@@ -24,15 +26,37 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
     accounts,
     categories,
     isLoading,
-  } = useEditTransactionModalController(transaction);
+    isDeleteModalOpen,
+    handleDeleteTransaction,
+    handleCloseDeleteModal,
+    isLoadingDelete,
+    handleOpenDeleteModal,
+  } = useEditTransactionModalController(transaction, onClose);
 
   const isExpense = transaction?.type === 'EXPENSE';
+
+  if (isDeleteModalOpen) {
+    return <ConfirmDeleteModal
+      onClose={handleCloseDeleteModal}
+      title={`Tem certeza que deseja excluir esta ${isExpense ? 'despesa' : 'receita'}?`}
+      onConfirm={handleDeleteTransaction}
+      isLoading={isLoadingDelete}
+    />
+  }
 
   return (
     <Modal
       title={isExpense ? 'Editar Despesa' : 'Editar Receita'}
       open={open}
       onClose={onClose}
+      rightAction={
+        <button
+          type="button"
+          onClick={handleOpenDeleteModal}
+        >
+          <TrashIcon className="w-6 h-6 text-red-900" />
+        </button>
+      }
     >
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">

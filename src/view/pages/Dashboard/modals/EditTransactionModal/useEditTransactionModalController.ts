@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -27,6 +27,7 @@ type formData = z.infer<typeof schema>;
 
 export function useEditTransactionModalController(
   transaction: Transaction | null,
+  onClose: () => void,
 ) {
   const {
     register,
@@ -51,28 +52,68 @@ export function useEditTransactionModalController(
     return categoriesList.filter(category => category.type === transaction?.type);
   }, [categoriesList, transaction]);
 
-  const handleSubmit = hookFormHandleSubmit(async data => {
-    console.log(data)
-    // try {
-    //   await mutateAsync({
-    //     ...data,
-    //     value: currencyStringToNumber(data.value),
-    //     type: newTransactionType!,
-    //     date: data.date.toISOString(),
-    //   });
-
-    //   queryClient.invalidateQueries({ queryKey: ['transactions'] });
-    //   toast.success(
-    //     newTransactionType === 'EXPENSE' ? 'Despesa cadastrada com sucesso' : 'Receita cadastrada com sucesso',
-    //   );
-    //   reset();
-    //   closeNewTransactionModal();
-    // } catch (error) {
-    //   toast.error(
-    //     newTransactionType === 'EXPENSE' ? 'Erro ao cadastrar a despesa' : 'Erro ao cadastrar a receita',
-    //   );
-    // }
+  const {
+    isPending: isLoading,
+    mutateAsync: updateTransaction,
+  } = useMutation({
+    mutationFn: transactionsService.update,
   });
+
+  const {
+    isPending: isLoadingDelete,
+    mutateAsync: deleteTransaction,
+  } = useMutation({
+    mutationFn: transactionsService.remove,
+  });
+  
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const queryClient = useQueryClient();
+
+  const handleSubmit = hookFormHandleSubmit(async data => {
+    try {
+      await updateTransaction({
+        ...data,
+        id: transaction!.id,
+        value: currencyStringToNumber(data.value),
+        type: transaction!.type,
+        date: data.date.toISOString(),
+      });
+
+      queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      // queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+
+      toast.success(
+        transaction!.type === 'EXPENSE' ? 'Despesa editada com sucesso' : 'Receita editada com sucesso',
+      );
+      onClose();
+    } catch (error) {
+      toast.error(
+        transaction!.type === 'EXPENSE' ? 'Erro ao editar a despesa' : 'Erro ao editar a receita',
+      );
+    }
+  });
+
+  async function handleDeleteTransaction() {
+    try {
+      await deleteTransaction(transaction!.id);
+
+      queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      // queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+      toast.success(`A ${transaction!.type === 'EXPENSE' ? 'despesa' : 'receita'} foi deletada com sucesso`);
+      onClose();
+    } catch (error) {
+      toast.error(`Erro ao deletar a ${transaction!.type === 'EXPENSE' ? 'despesa' : 'receita'}!`);
+    }
+  }
+
+  function handleOpenDeleteModal() {
+    setIsDeleteModalOpen(true);
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeleteModalOpen(false);
+  }
 
   return {
     register,
@@ -81,6 +122,11 @@ export function useEditTransactionModalController(
     handleSubmit,
     accounts,
     categories,
-    isLoading: false,
+    isLoading,
+    isDeleteModalOpen,
+    isLoadingDelete,
+    handleDeleteTransaction,
+    handleCloseDeleteModal,
+    handleOpenDeleteModal,
   };
 }
