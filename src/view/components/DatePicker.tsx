@@ -1,6 +1,6 @@
 import { ptBR } from "date-fns/locale";
 import { format } from "date-fns";
-import { DateLib, DayPicker, type DateLibOptions, type MonthCaptionProps } from "react-day-picker";
+import { DayPicker, type MonthCaptionProps } from "react-day-picker";
 import { capitalize } from "../../app/utils/capitalize";
 import "react-day-picker/style.css";
 
