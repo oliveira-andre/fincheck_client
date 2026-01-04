@@ -20,6 +20,7 @@ export function AccountCard({ data }: AccountCardProps) {
       }}
       role="button"
       onClick={() => openEditAccountModal(data)}
+      key={id}
     >
       <div>
         <BankAccountTypeIcon type={type} />

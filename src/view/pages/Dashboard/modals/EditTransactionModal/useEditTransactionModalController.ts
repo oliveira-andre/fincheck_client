@@ -5,7 +5,6 @@ import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { useDashboard } from "../../components/DashboardContext/useDashboard";
 import { useBankAccounts } from "../../../../../app/hooks/useBankAccounts";
 import { useCategories } from "../../../../../app/hooks/useCategories";
 import { transactionsService } from "../../../../../app/services/transactionsService";

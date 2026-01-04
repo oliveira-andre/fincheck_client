@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDownIcon, CrossCircledIcon } from "@radix-ui/react-icons";
+import { CrossCircledIcon } from "@radix-ui/react-icons";
 
 import { cn } from "../../app/utils/cn";
 import { formatDate } from "../../app/utils/formatDate";

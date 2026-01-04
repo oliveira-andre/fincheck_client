@@ -1,6 +1,6 @@
 import { ptBR } from "date-fns/locale";
 import { format } from "date-fns";
-import { DayPicker } from "react-day-picker";
+import { DateLib, DayPicker, type DateLibOptions, type MonthCaptionProps } from "react-day-picker";
 import { capitalize } from "../../app/utils/capitalize";
 import "react-day-picker/style.css";
 
@@ -8,6 +8,14 @@ import "react-day-picker/style.css";
 interface DatePickerProps {
   value: Date;
   onChange: (date: Date) => void;
+}
+
+function CustomMonthCaption({ calendarMonth }: MonthCaptionProps) {
+  return (
+    <span className="text-gray-900 tracking-[-0.408px] font-medium">
+      {capitalize(format(calendarMonth.date, 'LLLL yyyy'))}
+    </span>
+  );
 }
 
 export function DatePicker({ value, onChange }: DatePickerProps) {
@@ -26,14 +34,8 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
         day_today: 'bg-gray-100 font-bold text-gray-900',
         selected: '!bg-teal-300 rounded-full !text-white font-medium',
       }}
-      formatters={{
-        formatCaption: (date, options) => {
-          return (
-            <span className="text-gray-900 tracking-[-0.408px] font-medium">
-              {capitalize(format(date, 'LLLL yyyy', options))}
-            </span>
-          )
-        }
+      components={{
+        MonthCaption: CustomMonthCaption
       }}
     />
   )

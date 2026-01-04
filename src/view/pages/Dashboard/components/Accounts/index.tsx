@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/css';
+import 'swiper/swiper.css';
 
 import { cn } from "../../../../../app/utils/cn";
 import { EyeIcon } from "../../../../components/icons/EyeIcon";
