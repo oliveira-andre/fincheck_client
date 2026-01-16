@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
 import { useDashboard } from "../DashboardContext/useDashboard";
@@ -7,6 +7,11 @@ import { useCategories } from "../../../../../app/hooks/useCategories";
 
 export function useAccountsController() {
   const [sliderState, setSliderState] = useState({
+    isBeginning: true,
+    isEnd: false,
+  });
+
+  const [categorySliderState, setCategorySliderState] = useState({
     isBeginning: true,
     isEnd: false,
   });
@@ -27,9 +32,19 @@ export function useAccountsController() {
     return accounts.reduce((total, account) => total + account.currentBalance, 0);
   }, [accounts]);
 
+  useEffect(() => {
+    setCategorySliderState({ isBeginning: true, isEnd: false });
+  }, [categories]);
+
+  useEffect(() => {
+    setSliderState({ isBeginning: true, isEnd: false });
+  }, [accounts]);
+
   return {
     sliderState,
     setSliderState,
+    categorySliderState,
+    setCategorySliderState,
     windowWidth,
     areValuesVisible,
     toggleValuesVisibility,

@@ -17,6 +17,8 @@ export function Accounts() {
   const {
     sliderState,
     setSliderState,
+    categorySliderState,
+    setCategorySliderState,
     windowWidth,
     areValuesVisible,
     toggleValuesVisibility,
@@ -75,7 +77,7 @@ export function Accounts() {
                     spaceBetween={16}
                     slidesPerView={windowWidth >= 500 ? 3.2 : 1.2}
                     onSlideChange={swiper => {
-                      setSliderState({
+                      setCategorySliderState({
                         isBeginning: swiper.isBeginning,
                         isEnd: swiper.isEnd,
                       });
@@ -87,8 +89,8 @@ export function Accounts() {
                       </strong>
                       
                       <SliderNavigation
-                        isBegin={sliderState.isBeginning}
-                        isEnd={sliderState.isEnd}
+                        isBegin={categorySliderState.isBeginning}
+                        isEnd={categorySliderState.isEnd}
                       />
                     </div>
 
