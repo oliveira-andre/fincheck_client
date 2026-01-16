@@ -1,5 +1,6 @@
 import { createContext, useCallback, useState } from "react";
 import type { BankAccount } from "../../../../../app/entities/BankAccount";
+import type { Category } from "../../../../../app/entities/Category";
 
 interface DashboardContextValue {
   areValuesVisible: boolean;
@@ -19,6 +20,11 @@ interface DashboardContextValue {
   isNewCategoryModalOpen: boolean;
   openNewCategoryModal: () => void;
   closeNewCategoryModal: () => void;
+  isEditCategoryModalOpen: boolean;
+  categoryBeingEdited: Category | null;
+  setCategoryBeingEdited: (category: Category) => void;
+  openEditCategoryModal: (category: Category) => void;
+  closeEditCategoryModal: () => void;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValue);
@@ -31,6 +37,8 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [accountBeingEdited, setAccountBeingEdited] = useState<BankAccount | null>(null);
   const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null);
   const [isNewCategoryModalOpen, setIsNewCategoryModalOpen] = useState(false);
+  const [isEditCategoryModalOpen, setIsEditCategoryModalOpen] = useState(false);
+  const [categoryBeingEdited, setCategoryBeingEdited] = useState<Category | null>(null);
 
   const toggleValuesVisibility = useCallback(() => {
     setAreValuesVisible(prevState => !prevState);
@@ -72,6 +80,16 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     setIsNewCategoryModalOpen(false);
   }, []);
 
+  const openEditCategoryModal = useCallback((category: Category) => {
+    setCategoryBeingEdited(category);
+    setIsEditCategoryModalOpen(true);
+  }, []);
+
+  const closeEditCategoryModal = useCallback(() => {
+    setCategoryBeingEdited(null);
+    setIsEditCategoryModalOpen(false);
+  }, []);
+
   return (
     <DashboardContext.Provider
       value={{
@@ -92,6 +110,11 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
         isNewCategoryModalOpen,
         openNewCategoryModal,
         closeNewCategoryModal,
+        isEditCategoryModalOpen,
+        categoryBeingEdited,
+        setCategoryBeingEdited,
+        openEditCategoryModal,
+        closeEditCategoryModal,
       }}
     >
       {children}

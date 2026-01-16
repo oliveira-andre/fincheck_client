@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
 import { useDashboard } from "../DashboardContext/useDashboard";
 import { useBankAccounts } from "../../../../../app/hooks/useBankAccounts";
+import { useCategories } from "../../../../../app/hooks/useCategories";
 
 export function useAccountsController() {
   const [sliderState, setSliderState] = useState({
@@ -18,6 +19,7 @@ export function useAccountsController() {
   } = useDashboard();
 
   const { accounts, isFetching } = useBankAccounts();
+  const { categories, isFetching: isFetchingCategories } = useCategories();
 
   const currentBalance = useMemo(() => {
     if (!accounts) return 0;
@@ -33,6 +35,8 @@ export function useAccountsController() {
     toggleValuesVisibility,
     isLoading: isFetching,
     accounts: accounts ?? [],
+    categories: categories ?? [],
+    isLoadingCategories: isFetchingCategories,
     openNewAccountModal,
     currentBalance,
   };
