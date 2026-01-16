@@ -8,7 +8,7 @@ import { cn } from "../../../../../../app/utils/cn";
 interface FiltersModalProps {
   open: boolean;
   onClose: () => void;
-  onApplyFilters: (filters: { bankAccountId: string | undefined, year: number }) => void;
+  onApplyFilters: (filters: { bankAccountId: string | undefined, year: number, categoryId: string | undefined }) => void;
 }
 
 export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProps) {
@@ -18,6 +18,9 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
     selectedYear,
     handleSelectYear,
     accounts,
+    categories,
+    selectedCategoryId,
+    handleSelectCategory,
   } = useFiltersModalController();
 
   return (
@@ -42,6 +45,24 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
               )}
             >
               {account.name}
+            </button>
+          ))}
+        </div>
+
+        <span className="text-lg font-bold tracking-[-1px] text-gray-800">
+          Categoria
+        </span>
+        <div className="space-y-2 mt-2 max-h-[200px] overflow-y-auto">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => handleSelectCategory(category.id)}
+              className={cn(
+                'p-2 rounded-2xl w-full text-left text-gray-800 hover:bg-gray-50 transition-colors',
+                selectedCategoryId === category.id && '!bg-gray-50',
+              )}
+            >
+              {category.name}
             </button>
           ))}
         </div>
@@ -75,7 +96,7 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
 
       <Button
         className="w-full mt-10"
-        onClick={() => onApplyFilters({ bankAccountId: selectedBankAccountId, year: selectedYear })}
+        onClick={() => onApplyFilters({ bankAccountId: selectedBankAccountId, year: selectedYear, categoryId: selectedCategoryId })}
       >
         Aplicar Filtros
       </Button>
