@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -10,6 +10,7 @@ import { useCategories } from "../../../../../app/hooks/useCategories";
 import { transactionsService } from "../../../../../app/services/transactionsService";
 import { currencyStringToNumber } from "../../../../../app/utils/currencyStringToNumber";
 import type { Transaction } from "../../../../../app/entities/Transaction";
+import type { Category } from "../../../../../app/entities/Category";
 
 const schema = z.object({
   bankAccountId: z.string().nonempty('Informe a conta'),
@@ -47,8 +48,10 @@ export function useEditTransactionModalController(
   const { accounts } = useBankAccounts();
   const { categories: categoriesList } = useCategories();
 
-  const categories = useMemo(() => {
-    return categoriesList.filter(category => category.type === transaction?.type);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    setCategories(categoriesList.filter(category => category.type === transaction?.type));
   }, [categoriesList, transaction]);
 
   const {
@@ -115,6 +118,13 @@ export function useEditTransactionModalController(
     setIsDeleteModalOpen(false);
   }
 
+  function filterCategoriesByBankAccountId(bankAccountId: string) {
+    const categories = categoriesList.filter(category => category.type === transaction?.type && category.bankAccountId === bankAccountId);
+    if (categories.length > 0) {
+      setCategories(categories);
+    }
+  }
+
   return {
     register,
     errors,
@@ -128,5 +138,6 @@ export function useEditTransactionModalController(
     handleDeleteTransaction,
     handleCloseDeleteModal,
     handleOpenDeleteModal,
+    filterCategoriesByBankAccountId,
   };
 }

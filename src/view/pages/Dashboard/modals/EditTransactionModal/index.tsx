@@ -31,6 +31,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
     handleCloseDeleteModal,
     isLoadingDelete,
     handleOpenDeleteModal,
+    filterCategoriesByBankAccountId,
   } = useEditTransactionModalController(transaction, onClose);
 
   const isExpense = transaction?.type === 'EXPENSE';
@@ -90,6 +91,29 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
           />
 
           <Controller
+            name="bankAccountId"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <Select
+                placeholder={isExpense ? 'Pagar com' : 'Receber na conta'}
+                error={errors.bankAccountId?.message}
+                onChange={currentValue => {
+                  filterCategoriesByBankAccountId(currentValue);
+                  onChange(currentValue);
+                }}
+                value={value}
+                options={
+                  accounts.map(account => ({
+                    label: account.name,
+                    value: account.id,
+                  }))
+                }
+              />
+            )}
+            />
+
+          <Controller
             name="categoryId"
             control={control}
             defaultValue=""
@@ -106,27 +130,6 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
               />
               )}
             />
-
-          <Controller
-            name="bankAccountId"
-            control={control}
-            defaultValue=""
-            render={({ field: { onChange, value } }) => (
-              <Select
-                placeholder={isExpense ? 'Pagar com' : 'Receber na conta'}
-                error={errors.bankAccountId?.message}
-                onChange={onChange}
-                value={value}
-                options={
-                  accounts.map(account => ({
-                    label: account.name,
-                    value: account.id,
-                  }))
-                }
-              />
-            )}
-            />
-
           <Controller
             name="date"
             control={control}
