@@ -1,5 +1,3 @@
-import { cn } from "../../../../../app/utils/cn";
-import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
 import { useDashboard } from "../DashboardContext/useDashboard";
 import type { Category } from "../../../../../app/entities/Category";
