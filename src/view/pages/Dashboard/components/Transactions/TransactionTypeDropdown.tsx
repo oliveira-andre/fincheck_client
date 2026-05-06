@@ -13,17 +13,17 @@ export function TransactionTypeDropdown({ onSelect, selectedType }: TransactionT
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        <button type="button" className="flex items-center gap-2"> 
+        <button type="button" className="flex items-center gap-2 text-teal-900 dark:text-teal-300">
           {selectedType === 'INCOME' && <IncomeIcon /> }
           {selectedType === 'EXPENSE' && <ExpensesIcon /> }
           {selectedType === undefined && <TransactionsIcon /> }
 
-          <span className="text-sm text-gray-800 tracking-[-0.5px] font-medium">
+          <span className="text-sm text-gray-800 dark:text-gray-100 tracking-[-0.5px] font-medium">
             {selectedType === 'INCOME' && 'Receitas' }
             {selectedType === 'EXPENSE' && 'Despesas' }
             {selectedType === undefined && 'Transações' }
           </span>
-          <ChevronDownIcon className="text-gray-900" />
+          <ChevronDownIcon className="text-gray-900 dark:text-white" />
         </button>
       </DropdownMenu.Trigger>
 

@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { Router } from './Router'
 import { AuthProvider } from './app/contexts/AuthContext'
+import { ThemeProvider } from './app/contexts/ThemeContext'
 
 
 export function App() {
@@ -19,11 +20,13 @@ export function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Router />
+      <ThemeProvider>
+        <AuthProvider>
+          <Router />
 
-        <Toaster />
-      </AuthProvider>
+          <Toaster />
+        </AuthProvider>
+      </ThemeProvider>
 
       <ReactQueryDevtools />
     </QueryClientProvider>

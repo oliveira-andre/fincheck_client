@@ -7,17 +7,17 @@ export function SliderNavigation() {
   return (
     <>
       <button
-        className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-gradient-to-r from-gray-100 to-transparent z-10"
+        className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-gradient-to-r from-gray-100 dark:from-gray-800 to-transparent z-10"
         onClick={() => swiper.slidePrev()}
       >
-        <ChevronLeftIcon className="text-gray-800 w-6 h-6" />
+        <ChevronLeftIcon className="text-gray-800 dark:text-gray-200 w-6 h-6" />
       </button>
 
       <button
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-gradient-to-l from-gray-100 to-transparent z-10"
+        className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-gradient-to-l from-gray-100 dark:from-gray-800 to-transparent z-10"
         onClick={() => swiper.slideNext()}
       >
-        <ChevronRightIcon className="text-gray-800 w-6 h-6" />
+        <ChevronRightIcon className="text-gray-800 dark:text-gray-200 w-6 h-6" />
       </button>
     </>
   )

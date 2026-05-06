@@ -30,7 +30,7 @@ export function DropdownMenuContent({ children, className }: DropdownMenuContent
       <RdxDropdownMenu.Content
         className={
           cn(
-            "rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-[99]",
+            "rounded-2xl p-2 bg-white dark:bg-gray-800 space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-[99]",
             "data-[side=bottom]:animate-slide-up-and-fade data-[side=top]:animate-slide-down-and-fade",
             className
           )}
@@ -53,8 +53,8 @@ export function DropdownMenuItem({ children, className, onSelect }: DropdownMenu
       onSelect={onSelect}
       className={
         cn(
-          "min-h-[40px] outline-none flex items-center px-4 py-2 text-gray-800 text-sm",
-          "hover:bg-gray-50 cursor-pointer rounded-2xl transition-colors data-[highlighted]:bg-gray-50",
+          "min-h-[40px] outline-none flex items-center px-4 py-2 text-gray-800 dark:text-gray-100 text-sm",
+          "hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-2xl transition-colors data-[highlighted]:bg-gray-50 dark:data-[highlighted]:bg-gray-700",
           className
         )}
     >

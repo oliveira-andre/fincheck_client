@@ -30,13 +30,13 @@ export function DatePickerInput({ className, error, value, onChange }: DatePicke
             type="button"
             className={
               cn(
-                'bg-white rounded-lg border border-gray-500 px-3 h-[52px] text-gray-700 w-full focus:border-teal-900 transition-all outline-none text-left relative pt-4',
+                'bg-white dark:bg-gray-700 rounded-lg border border-gray-500 dark:border-gray-600 px-3 h-[52px] text-gray-700 dark:text-gray-100 w-full focus:border-teal-900 dark:focus:border-teal-400 transition-all outline-none text-left relative pt-4',
                 error && '!border-red-900',
                 className,
               )
             }
             >
-            <span className="text-gray-700 text-xs absolute left-[13px] top-2 pointer-events-none">
+            <span className="text-gray-700 dark:text-gray-400 text-xs absolute left-[13px] top-2 pointer-events-none">
               Data
             </span>
             <span>{capitalize(formatDate(selectedDate))}</span>

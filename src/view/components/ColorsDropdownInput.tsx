@@ -53,7 +53,7 @@ export function ColorsDropdownInput({ className, error, onChange, value }: Color
           <button
             className={
               cn(
-                'bg-white rounded-lg border border-gray-500 px-3 h-[52px] text-gray-700 w-full focus:border-teal-900 transition-all outline-none text-left relative',
+                'bg-white dark:bg-gray-700 rounded-lg border border-gray-500 dark:border-gray-600 px-3 h-[52px] text-gray-700 dark:text-gray-200 w-full focus:border-teal-900 dark:focus:border-teal-400 transition-all outline-none text-left relative',
                 error && '!border-red-900',
                 className,
               )
@@ -63,7 +63,7 @@ export function ColorsDropdownInput({ className, error, onChange, value }: Color
 
             <div className="absolute right-3 top-1/2 -translate-y-1/2">
               {!selectedColor && (
-                <ChevronDownIcon className="w-6 h-6 text-gray-800" />
+                <ChevronDownIcon className="w-6 h-6 text-gray-800 dark:text-gray-300" />
               )}
 
               {selectedColor && (

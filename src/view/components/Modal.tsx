@@ -23,14 +23,14 @@ export function Modal({ open, children, title, rightAction, onClose }: ModalProp
         />
         <RdxDialog.Content
           className={cn(
-            'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-6 space-y-10 bg-white rounded-2xl shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-[51]',
+            'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-6 space-y-10 bg-white dark:bg-gray-800 rounded-2xl shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-[51]',
             'w-full max-w-[400px] outline-none',
             'data-[state=open]:animate-content-show',
           )}
         >
           <RdxDialog.Title>
             <header
-            className="h-12 flex items-center justify-between text-gray-800"
+            className="h-12 flex items-center justify-between text-gray-800 dark:text-gray-100"
             >
               <button className="w-12 h-12 flex items-center justify-center outline-none" onClick={onClose}>
                 <Cross2Icon className="w-6 h-6" />

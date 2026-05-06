@@ -20,7 +20,7 @@ export function InputCurrency({ error, onChange, value }: InputCurrencyProps) {
         value={value}
         className={
           cn(
-            'w-full text-gray-800 text-[32px] font-bold tracking-[-1px] outline-none',
+            'w-full bg-transparent text-gray-800 dark:text-gray-100 text-[32px] font-bold tracking-[-1px] outline-none',
             error && '!text-red-900',
           )
         }

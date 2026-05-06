@@ -36,7 +36,7 @@ export function Transactions() {
   const hasTransactions = transactions.length > 0;
 
   return (
-    <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
+    <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl w-full h-full p-10 flex flex-col">
       {isInitialLoading && (
         <div className="flex items-center justify-center h-full w-full">
           <Spinner
@@ -60,7 +60,7 @@ export function Transactions() {
               selectedType={filters.type}
             />
 
-            <button onClick={handleOpenFiltersModal}>
+            <button onClick={handleOpenFiltersModal} className="text-teal-900 dark:text-teal-300">
               <FilterIcon />
             </button>
           </div>
@@ -101,7 +101,7 @@ export function Transactions() {
           {(!hasTransactions && !isLoading) && (
             <div className="flex flex-col items-center justify-center h-full w-full gap-4">
               <img src={EmptyState} alt="Empty State" />
-              <p className="text-gray-600">Não encontramos nenhuma transação</p>
+              <p className="text-gray-600 dark:text-gray-400">Não encontramos nenhuma transação</p>
             </div>
           )}
 
@@ -118,7 +118,7 @@ export function Transactions() {
               {transactions.map((transaction) => (
                 <div
                   key={transaction.id}
-                  className="bg-white rounded-2xl p-4 flex items-center justify-between gap-4"
+                  className="bg-white dark:bg-gray-700 rounded-2xl p-4 flex items-center justify-between gap-4"
                   role="button"
                   onClick={() => handleOpenEditModal(transaction)}
                 >
@@ -129,10 +129,10 @@ export function Transactions() {
                     />
 
                     <div>
-                      <strong className="font-bold tracking-[-0.5px] block">
+                      <strong className="font-bold tracking-[-0.5px] block text-gray-800 dark:text-gray-100">
                         {transaction.name}
                       </strong>
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
                         {formatDate(new Date(transaction.date))}
                       </span>
                     </div>
@@ -142,7 +142,7 @@ export function Transactions() {
                     cn(
                       'tracking-[-0.5px] font-medium',
                       !areValuesVisible && 'blur-sm',
-                      transaction.type === 'INCOME' ? 'text-green-800' : 'text-red-800'
+                      transaction.type === 'INCOME' ? 'text-green-800 dark:text-green-400' : 'text-red-800 dark:text-red-400'
                     )}
                   >
                     {transaction.type === 'INCOME' ? '+' : '-'} {formatCurrency(transaction.value)}

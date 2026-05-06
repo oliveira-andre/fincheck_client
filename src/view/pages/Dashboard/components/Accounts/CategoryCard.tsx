@@ -16,7 +16,7 @@ export function CategoryCard({ data, accounts }: CategoryCardProps) {
 
   return (
     <div
-      className="bg-white rounded-2xl p-4 h-[200px] flex flex-col justify-between border-b-4 border-teal-950"
+      className="bg-white dark:bg-gray-800 rounded-2xl p-4 h-[200px] flex flex-col justify-between border-b-4 border-teal-950"
       style={{
         borderColor: color,
       }}
@@ -27,12 +27,12 @@ export function CategoryCard({ data, accounts }: CategoryCardProps) {
       <div>
         <CategoryIcon type={type === 'INCOME' ? 'income' : 'expense'} category={icon} />
 
-        <span className="font-medium text-gray-800 tracking-[-0.5px] mt-4 block">
+        <span className="font-medium text-gray-800 dark:text-gray-100 tracking-[-0.5px] mt-4 block">
           { name }
         </span>
 
         <div>
-          <span className='font-medium text-gray-800 tracking-[-0.5px] mt-4 block'>
+          <span className='font-medium text-gray-800 dark:text-gray-300 tracking-[-0.5px] mt-4 block'>
             {accounts.find(account => account.id === bankAccountId)?.name ?? 'Sem conta selecionada'}
           </span>
         </div>

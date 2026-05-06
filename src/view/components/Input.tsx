@@ -21,7 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         name={name}
         className={
           cn(
-            'bg-white rounded-lg border border-gray-500 px-3 h-[52px] text-gray-800 w-full pt-4 peer placeholder-shown:pt-0 focus:border-teal-900 transition-all outline-none',
+            'bg-white dark:bg-gray-700 rounded-lg border border-gray-500 dark:border-gray-600 px-3 h-[52px] text-gray-800 dark:text-gray-100 w-full pt-4 peer placeholder-shown:pt-0 focus:border-teal-900 dark:focus:border-teal-400 transition-all outline-none',
             error && '!border-red-900',
             className,
           )
@@ -31,7 +31,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
       <label
         htmlFor={inputId}
-        className="absolute text-xs left-[13px] top-2 pointer-events-none text-gray-700 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base transition-all"
+        className="absolute text-xs left-[13px] top-2 pointer-events-none text-gray-700 dark:text-gray-400 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base transition-all"
       >
         {placeholder}
       </label>

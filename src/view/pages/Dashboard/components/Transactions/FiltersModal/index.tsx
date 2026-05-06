@@ -30,7 +30,7 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
       title="Filtros"
     >
       <div>
-        <span className="text-lg font-bold tracking-[-1px] text-gray-800">
+        <span className="text-lg font-bold tracking-[-1px] text-gray-800 dark:text-gray-100">
           Conta
         </span>
 
@@ -40,8 +40,8 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
               key={account.id}
               onClick={() => handleSelectBankAccount(account.id)}
               className={cn(
-                'p-2 rounded-2xl w-full text-left text-gray-800 hover:bg-gray-50 transition-colors',
-                selectedBankAccountId === account.id && '!bg-gray-50',
+                'p-2 rounded-2xl w-full text-left text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors',
+                selectedBankAccountId === account.id && '!bg-gray-50 dark:!bg-gray-700',
               )}
             >
               {account.name}
@@ -49,7 +49,7 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
           ))}
         </div>
 
-        <span className="text-lg font-bold tracking-[-1px] text-gray-800">
+        <span className="text-lg font-bold tracking-[-1px] text-gray-800 dark:text-gray-100">
           Categoria
         </span>
         <div className="space-y-2 mt-2 max-h-[200px] overflow-y-auto">
@@ -58,8 +58,8 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
               key={category.id}
               onClick={() => handleSelectCategory(category.id)}
               className={cn(
-                'p-2 rounded-2xl w-full text-left text-gray-800 hover:bg-gray-50 transition-colors',
-                selectedCategoryId === category.id && '!bg-gray-50',
+                'p-2 rounded-2xl w-full text-left text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors',
+                selectedCategoryId === category.id && '!bg-gray-50 dark:!bg-gray-700',
               )}
             >
               {category.name}
@@ -68,7 +68,7 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
         </div>
       </div>
 
-      <div className="mt-10 text-gray-800">
+      <div className="mt-10 text-gray-800 dark:text-gray-100">
         <span className="text-lg font-bold tracking-[-1px]">
           Ano
         </span>

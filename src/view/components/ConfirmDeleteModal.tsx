@@ -18,13 +18,13 @@ export function ConfirmDeleteModal({ onClose, title, description, onConfirm, isL
       onClose={onClose}
     >
       <div className="flex flex-col items-center text-center gap-6">
-        <div className="w-[52px] h-[52px] bg-red-0 rounded-full flex items-center justify-center">
-          <TrashIcon className="w-6 h-6 text-red-900" />
+        <div className="w-[52px] h-[52px] bg-red-0 dark:bg-red-900/20 rounded-full flex items-center justify-center">
+          <TrashIcon className="w-6 h-6 text-red-900 dark:text-red-400" />
         </div>
 
-        <p className="w-[180px] text-gray-800 font-bold tracking-[-0.5px]">{title}</p>
+        <p className="w-[180px] text-gray-800 dark:text-gray-100 font-bold tracking-[-0.5px]">{title}</p>
 
-        <p className="text-gray-600 tracking-[-0.5px]">{description}</p>
+        <p className="text-gray-600 dark:text-gray-400 tracking-[-0.5px]">{description}</p>
       </div>
 
       <div className="mt-10 space-y-4">

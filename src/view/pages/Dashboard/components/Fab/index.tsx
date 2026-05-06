@@ -24,7 +24,7 @@ export function Fab() {
         <DropdownMenu.Content>
           <DropdownMenu.Item className="gap-2" onSelect={openNewCategoryModal}>
             <div className="bg-[#F3F0FF] rounded-full p-3">
-              <BackpackIcon className="w-4 h-4" />
+              <BackpackIcon className="w-4 h-4 text-violet-700" />
             </div>
             <span>Nova Categoria</span>
           </DropdownMenu.Item>

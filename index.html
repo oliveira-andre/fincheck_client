@@ -11,8 +11,18 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fincheck - Finance</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('fincheck:theme') || 'dark';
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="h-full bg-gray-50">
+  <body class="h-full bg-gray-50 dark:bg-gray-900">
     <div id="root" class="h-full"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

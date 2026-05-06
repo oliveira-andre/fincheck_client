@@ -52,10 +52,10 @@ export function EditAccountModal() {
     >
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
-          <span className="text-gray-600 text-xs tracking-[-0.5px]">Saldo</span>
+          <span className="text-gray-600 dark:text-gray-400 text-xs tracking-[-0.5px]">Saldo</span>
 
           <div className="flex items-center gap-2">
-            <span className="text-gray-600 text-lg tracking-[-0.5px]">R$</span>
+            <span className="text-gray-600 dark:text-gray-400 text-lg tracking-[-0.5px]">R$</span>
             <Controller
               name="initialBalance"
               control={control}
